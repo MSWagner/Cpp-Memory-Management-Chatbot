@@ -12,6 +12,8 @@
 ChatBot::ChatBot()
 {
     // invalidate data handles
+    std::cout << "invalidate data handles" << std::endl;
+
     _image = nullptr;
     _chatLogic = nullptr;
     _rootNode = nullptr;
@@ -35,8 +37,9 @@ ChatBot::~ChatBot()
     std::cout << "ChatBot Destructor" << std::endl;
 
     // deallocate heap memory
-    if(_image != NULL) // Attention: wxWidgets used NULL and not nullptr
+    if(_image) // Attention: wxWidgets used NULL and not nullptr
     {
+        std::cout << "Delete: " << _image << std::endl;
         delete _image;
         _image = NULL;
     }
