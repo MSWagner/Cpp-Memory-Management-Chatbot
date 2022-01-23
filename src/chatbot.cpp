@@ -48,6 +48,70 @@ ChatBot::~ChatBot()
 //// STUDENT CODE
 ////
 
+ChatBot & ChatBot::operator=(ChatBot const& other)
+{
+    std::cout << "Chatbot Copy Constructor" << std::endl;
+
+    if (this == &other)
+        return *this;
+
+    if (_image) {
+        std::cout << "Delete: " << _image << std::endl;
+        delete _image;
+        _image = NULL;
+    }
+
+    _image = other._image; // Bitmap has an copy constructor with reference counting like shared smart pointers
+
+    *_chatLogic = *other._chatLogic;
+    *_rootNode = *other._rootNode;
+    *_currentNode = *other._currentNode;
+
+    return *this;
+}
+
+ChatBot::ChatBot(ChatBot &&source)
+{
+    std::cout << "Chatbot Move Constructor" << std::endl;
+    std::cout << "MOVING instance " << &source << " to instance " << this << std::endl;
+
+    _image = source._image;
+    _chatLogic = source._chatLogic;
+    _rootNode = source._rootNode;
+    _currentNode = source._currentNode;
+
+    source._image = NULL;
+    source._chatLogic = nullptr;
+    source._rootNode = nullptr;
+    source._currentNode = nullptr;
+}
+
+ChatBot & ChatBot::operator=(ChatBot &&source)
+{
+    std::cout << "Chatbot Move Assignment Operator" << std::endl;
+    std::cout << "MOVING (assign) instance " << &source << " to instance " << this << std::endl;
+    if (this == &source)
+        return *this;
+
+    if (_image) {
+        std::cout << "Delete: " << _image << std::endl;
+        delete _image;
+        _image = NULL;
+    }
+
+    _image = source._image;
+    _chatLogic = source._chatLogic;
+    _rootNode = source._rootNode;
+    _currentNode = source._currentNode;
+
+    source._image = NULL;
+    source._chatLogic = nullptr;
+    source._rootNode = nullptr;
+    source._currentNode = nullptr;
+
+    return *this;
+}
+
 ////
 //// EOF STUDENT CODE
 
