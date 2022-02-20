@@ -48,9 +48,19 @@ ChatBot::~ChatBot()
 //// STUDENT CODE
 ////
 
-ChatBot & ChatBot::operator=(ChatBot const& other)
+ChatBot::ChatBot(ChatBot &source) 
 {
-    std::cout << "Chatbot Copy Constructor" << std::endl;
+    std::cout << "ChatBot Copy Constructor" << std::endl;
+
+    _image = new wxBitmap();
+    *_image = *(source._image);
+    _chatLogic = source._chatLogic;
+    _rootNode = source._rootNode;
+}
+
+ChatBot & ChatBot::operator=(ChatBot &other)
+{
+    std::cout << "ChatBot Copy Assignment Operator" << std::endl;
 
     if (this == &other)
         return *this;
@@ -63,9 +73,9 @@ ChatBot & ChatBot::operator=(ChatBot const& other)
 
     _image = other._image; // Bitmap has an copy constructor with reference counting like shared smart pointers
 
-    *_chatLogic = *other._chatLogic;
-    *_rootNode = *other._rootNode;
-    *_currentNode = *other._currentNode;
+    _chatLogic = other._chatLogic;
+    _rootNode = other._rootNode;
+    _currentNode = other._currentNode;
 
     return *this;
 }
