@@ -71,7 +71,7 @@ ChatBot & ChatBot::operator=(ChatBot &other)
         _image = NULL;
     }
 
-    _image = other._image; // Bitmap has an copy constructor with reference counting like shared smart pointers
+    *_image = *(other._image); // Bitmap has an copy constructor with reference counting like shared smart pointers
 
     _chatLogic = other._chatLogic;
     _rootNode = other._rootNode;
