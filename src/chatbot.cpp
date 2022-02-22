@@ -65,14 +65,8 @@ ChatBot & ChatBot::operator=(ChatBot &other)
     if (this == &other)
         return *this;
 
-    if (_image) {
-        std::cout << "Delete: " << _image << std::endl;
-        delete _image;
-        _image = NULL;
-    }
-
+    _image = new wxBitmap();
     *_image = *(other._image); // Bitmap has an copy constructor with reference counting like shared smart pointers
-
     _chatLogic = other._chatLogic;
     _rootNode = other._rootNode;
 
